@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Ulutaş A.Ş Panel</title>
+<link rel="stylesheet" href="anasayfa.css">
+</head>
+<body>
+
+<header>
+<h1>ULUTAŞ A.Ş</h1>
+<div id="kullaniciBilgi"></div>
+</header>
+
+<!-- REKLAM PANOSU -->
+
+<div class="reklamAlan">
+
+  <div class="reklamKutu">
+    <a href="https://youtu.be/cuJl5PgMP8k?si=ewPaPFnDOpoOoXcI" target="_blank">
+      <video autoplay muted loop playsinline class="reklamVideo">
+        <source src="reklam.mp4" type="video/mp4">
+      </video>
+    </a>
+    <h3>REKLAM PANOSU</h3>
+    <p>Bu alana reklam verebilirsiniz</p>
+    <p class="fiyat">Haftalık 250 TL</p>
+  </div>
+
+  <div class="reklamKutu">
+    <a href="https://youtube.com" target="_blank">
+      <video autoplay muted loop playsinline class="reklamVideo">
+        <source src="lv_0_20260219191937.mp4" type="video/mp4">
+      </video>
+    </a>
+    <h3>REKLAM PANOSU</h3>
+    <p> Kemal Ulutaş - Seni Çok özlüyorum YouTube kanalında yayında </p>
+    <p class="fiyat">Haftalık 250 TL</p>
+  </div>
+
+</div>
+
+<div class="container">
+
+<div class="kart">
+
+<h2>Yeni İş</h2>
+
+<input id="yuk" placeholder="Yük Türü">
+<input id="nereden" placeholder="Nereden">
+<input id="nereye" placeholder="Nereye">
+
+<button onclick="isBaslat()">İşi Başlat</button>
+
+</div>
+
+<div class="kart">
+
+<h2>Aktif İş</h2>
+
+<div id="aktifIs"></div>
+
+<button onclick="teslim()">Teslim Et</button>
+
+</div>
+
+<div class="kart">
+
+<h2>Liderlik</h2>
+
+<div id="liderlik"></div>
+
+</div>
+
+<div class="kart">
+
+<h2>Teslimat Geçmişi</h2>
+
+<button onclick="gecmisiSifirla()">Teslimat Geçmişini Sıfırla</button>
+
+<div id="gecmis"></div>
+
+</div>
+
+</div>
+
+<!-- DİKKAT -->
+
+<div id="onayEkrani" class="popup">
+
+<h2>DİKKAT</h2>
+
+<p>Sevgili kaptan, ekran kaydedicini açmalı ve sefer sonuna kadar video kaydı almak zorundasın.</p>
+
+<p>Video kaydı olmayan teslimatlar geçersiz sayılır ve hile olarak değerlendirilir.</p>
+
+<p>Puanın iptal edilir ve sistemden uzaklaştırılabilirsin.</p>
+
+<p>Kayıtlar gerçek kişiler tarafından incelenmektedir.</p>
+
+<p><b>İyi yolculuklar kaptan.</b></p>
+
+<button onclick="onayla()">Kabul Ediyorum</button>
+<button onclick="iptal()">Vazgeç</button>
+
+</div>
+
+<!-- TESLİMAT -->
+
+<div id="videoGonder" class="popup">
+
+<h2>SEFER TAMAMLANDI</h2>
+
+<p>Sevgili kaptan, teslimat sisteme kaydedildi.</p>
+
+<p>Ekran kaydını doğrulama için bize göndermen gerekiyor.</p>
+
+<p><b>WhatsApp:</b> 0549 541 18 74</p>
+<p><b>E-posta:</b> kemalulutasets@gmail.com</p>
+
+<p>Gönderirken kullanıcı adını ve yaptığın seferi yaz.</p>
+
+<p>Kayıt incelendikten sonra puanın kesinleşir.</p>
+
+<p><b>Ulutaş A.Ş iyi yolculuklar diler.</b></p>
+
+<button onclick="kapatVideo()">Tamam</button>
+
+</div>
+
+<div id="bildirim" class="bildirim"></div>
+
+<script src="anasayfa.js"></script>
+</body>
+</html>
