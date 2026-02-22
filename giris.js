@@ -1,50 +1,51 @@
-function kayit(){
-
-let kullanici=document.getElementById("kullanici").value;
-let sifre=document.getElementById("sifre").value;
-
-if(kullanici=="" || sifre==""){
-mesaj("Bilgileri doldur.");
-return;
-}
-
-let users=JSON.parse(localStorage.getItem("users")) || [];
-
-let varmi=users.find(u=>u.kullanici===kullanici);
-
-if(varmi){
-mesaj("Bu kullanıcı zaten var.");
-return;
-}
-
-users.push({kullanici,sifre,para:0,puan:0});
-localStorage.setItem("users",JSON.stringify(users));
-
-mesaj("Kayıt başarılı.");
-}
-
 function giris(){
+    const email = document.getElementById("email").value.trim();
+    if(!email){
+        document.getElementById("mesaj").innerText = "E-posta gir!";
+        return;
+    }
 
-let kullanici=document.getElementById("kullanici").value;
-let sifre=document.getElementById("sifre").value;
+    // E-posta format kontrolü
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailRegex.test(email)){
+        document.getElementById("mesaj").innerText = "Geçerli bir e-posta gir!";
+        return;
+    }
 
-let users=JSON.parse(localStorage.getItem("users")) || [];
+    let kayitliKullanicilar = JSON.parse(localStorage.getItem("kullanicilar") || "[]");
 
-let user=users.find(u=>u.kullanici===kullanici && u.sifre===sifre);
+    if(!kayitliKullanicilar.includes(email)){
+        document.getElementById("mesaj").innerText = "Kayıtlı e-posta değil! Lütfen kayıt olun.";
+        return;
+    }
 
-if(user){
-
-localStorage.setItem("aktifKullanici", kullanici)
-
-window.location="anasayfa.html"
-
+    localStorage.setItem("kullaniciAdi", email);
+    window.location.href = "anasayfa.html";
 }
-else{
-mesaj("Bilgiler yanlış.");
-}
 
-}
+function kayit(){
+    const email = document.getElementById("email").value.trim();
+    if(!email){
+        document.getElementById("mesaj").innerText = "E-posta gir!";
+        return;
+    }
 
-function mesaj(text){
-document.getElementById("mesaj").innerText=text;
+    // E-posta format kontrolü
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailRegex.test(email)){
+        document.getElementById("mesaj").innerText = "Geçerli bir e-posta gir!";
+        return;
+    }
+
+    let kayitliKullanicilar = JSON.parse(localStorage.getItem("kullanicilar") || "[]");
+
+    if(kayitliKullanicilar.includes(email)){
+        document.getElementById("mesaj").innerText = "Bu e-posta zaten kayıtlı!";
+        return;
+    }
+
+    kayitliKullanicilar.push(email);
+    localStorage.setItem("kullanicilar", JSON.stringify(kayitliKullanicilar));
+    localStorage.setItem("kullaniciAdi", email);
+    window.location.href = "anasayfa.html";
 }
