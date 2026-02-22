@@ -1,0 +1,49 @@
+body {
+  background-color: #020617; /* siyah arka plan */
+  color: white; /* beyaz yazı */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.kurallar-container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #111;
+  border-radius: 10px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #22c55e;
+}
+
+.kural {
+  margin-bottom: 20px;
+}
+
+.kural h2 {
+  color: #22c55e;
+  margin-bottom: 5px;
+}
+
+.kural p {
+  line-height: 1.6;
+}
+
+.geri-don {
+  display: block;
+  margin: 30px auto 0 auto;
+  padding: 10px 25px;
+  background-color: #22c55e;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.geri-don:hover {
+  opacity: 0.8;
+}
