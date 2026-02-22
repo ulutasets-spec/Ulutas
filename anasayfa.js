@@ -3,6 +3,8 @@ let aktifIs = null;
 let puan = Number(localStorage.getItem("puan")) || 0;
 let bakiye = Number(localStorage.getItem("bakiye")) || 0;
 let gecmis = JSON.parse(localStorage.getItem("gecmis")) || [];
+let geriSayim = Number(localStorage.getItem("geriSayim")) || 0;
+let geriSayimInterval = null;
 
 const aktifIsDiv = document.getElementById("aktifIs");
 const gecmisDiv = document.getElementById("gecmis");
@@ -15,13 +17,18 @@ function kaydet(){
     localStorage.setItem("puan", puan);
     localStorage.setItem("bakiye", bakiye);
     localStorage.setItem("gecmis", JSON.stringify(gecmis));
+    localStorage.setItem("geriSayim", geriSayim);
 }
 
 function goster(){
-    aktifIsDiv.innerHTML = aktifIs
-    ? `<p>${aktifIs.yuk}</p>
-       <p>${aktifIs.nereden} → ${aktifIs.nereye}</p>`
-    : "Aktif iş yok";
+    if(geriSayim > 0){
+        aktifIsDiv.innerHTML = `İş alabilmek için bekle: ${geriSayim} dakika`;
+    } else {
+        aktifIsDiv.innerHTML = aktifIs
+            ? `<p>${aktifIs.yuk}</p>
+               <p>${aktifIs.nereden} → ${aktifIs.nereye}</p>`
+            : "Aktif iş yok";
+    }
 
     gecmisDiv.innerHTML = "";
     gecmis.forEach(i=>{
@@ -80,6 +87,11 @@ function bildirimGoster(mesaj){
 }
 
 function isBaslat(){
+    if(geriSayim > 0){
+        bildirimGoster(`İş alabilmek için ${geriSayim} dakika bekle`);
+        return;
+    }
+
     const yuk = document.getElementById("yuk").value;
     const nereden = document.getElementById("nereden").value;
     const nereye = document.getElementById("nereye").value;
@@ -122,9 +134,22 @@ function teslim(){
     gecmis.unshift(yazi);
 
     aktifIs = null;
+
+    // Teslimden sonra 90 dakika geri sayım başlat
+    geriSayim = 90;
+    localStorage.setItem("geriSayim", geriSayim);
+    geriSayimInterval = setInterval(()=>{
+        geriSayim--;
+        localStorage.setItem("geriSayim", geriSayim);
+        if(geriSayim <= 0){
+            clearInterval(geriSayimInterval);
+            localStorage.removeItem("geriSayim");
+        }
+        goster();
+    }, 60000);
+
     kaydet();
     goster();
-
     videoGonder.style.display = "flex";
 }
 
@@ -137,6 +162,19 @@ function gecmisiSifirla(){
     kaydet();
     goster();
     bildirimGoster("Geçmiş silindi");
+}
+
+// Sayfa açıldığında geri sayım varsa başlat
+if(geriSayim > 0){
+    geriSayimInterval = setInterval(()=>{
+        geriSayim--;
+        localStorage.setItem("geriSayim", geriSayim);
+        if(geriSayim <= 0){
+            clearInterval(geriSayimInterval);
+            localStorage.removeItem("geriSayim");
+        }
+        goster();
+    }, 60000);
 }
 
 goster();
