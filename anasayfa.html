@@ -10,32 +10,32 @@
 <header>
 <h1>ULUTAŞ A.Ş</h1>
 <div id="kullaniciBilgi"></div>
+<button onclick="cikisYap()">Çıkış Yap</button>
 </header>
 
 <!-- REKLAM PANOSU -->
-
 <div class="reklamAlan">
 
+  <!-- ÜSTTEKİ REKLAM: FOTOĞRAF OLARAK -->
   <div class="reklamKutu">
-    <a href="https://youtu.be/cuJl5PgMP8k?si=FQTEQeDHRyZZAOj9" target="_blank">
-      <video autoplay muted loop playsinline class="reklamVideo">
-        <source src="reklam.mp4" type="video/mp4">
-      </video>
+    <a href="https://youtu.be/EjIngNkr1Yc?si=hZxiDz4ts2G74-4U" target="_blank">
+      <img src="reklam.jpg" alt="Reklam" class="reklamResim">
     </a>
     <h3>REKLAM PANOSU</h3>
     <p>Bu alana reklam verebilirsiniz</p>
-    <p class="fiyat">Haftalık 250 TL</p>
+    <p class="fiyat">Haftalık 500 TL</p>
   </div>
 
+  <!-- ALTTAKİ REKLAM: VİDEO OLARAK KALSIN -->
   <div class="reklamKutu">
-    <a href="https://youtu.be/cuJl5PgMP8k?si=FQTEQeDHRyZZAOj9" target="_blank">
+    <a href="https://youtu.be/cuJl5PgMP8k?si=azOYrksDWrtC7kWJ" target="_blank">
       <video autoplay muted loop playsinline class="reklamVideo">
         <source src="lv_0_20260219191937.mp4" type="video/mp4">
       </video>
     </a>
     <h3>REKLAM PANOSU</h3>
-    <p> Kemal Ulutaş - Seni Çok özlüyorum YouTube kanalında yayında </p>
-    <p class="fiyat">Haftalık 250 TL</p>
+    <p>Kemal Ulutaş - Seni Çok özlüyorum YouTube kanalında yayında</p>
+    <p class="fiyat">Haftalık 500 TL</p>
   </div>
 
 </div>
@@ -43,93 +43,67 @@
 <div class="container">
 
 <div class="kart">
-
 <h2>Yeni İş</h2>
-
 <input id="yuk" placeholder="Yük Türü">
 <input id="nereden" placeholder="Nereden">
 <input id="nereye" placeholder="Nereye">
-
 <button onclick="isBaslat()">İşi Başlat</button>
-
 </div>
 
 <div class="kart">
-
 <h2>Aktif İş</h2>
-
 <div id="aktifIs"></div>
-
 <button onclick="teslim()">Teslim Et</button>
-
 </div>
 
 <div class="kart">
-
 <h2>Liderlik</h2>
-
 <div id="liderlik"></div>
-
 </div>
 
 <div class="kart">
-
 <h2>Teslimat Geçmişi</h2>
-
 <button onclick="gecmisiSifirla()">Teslimat Geçmişini Sıfırla</button>
-
 <div id="gecmis"></div>
-
 </div>
 
 </div>
 
-<!-- DİKKAT -->
-
+<!-- DİKKAT / İŞ BAŞLAT POPUP -->
 <div id="onayEkrani" class="popup">
-
 <h2>DİKKAT</h2>
-
-<p>Sevgili kaptan, ekran kaydedicini açmalı ve sefer sonuna kadar video kaydı almak zorundasın.</p>
-
-<p>Video kaydı olmayan teslimatlar geçersiz sayılır ve hile olarak değerlendirilir.</p>
-
-<p>Puanın iptal edilir ve sistemden uzaklaştırılabilirsin.</p>
-
-<p>Kayıtlar gerçek kişiler tarafından incelenmektedir.</p>
-
-<p><b>İyi yolculuklar kaptan.</b></p>
-
+<p>İşi başlatmadan önce ekran kaydı açmalısınız.<br>
+Hile yapmayın, tüm kayıtlar yöneticiler tarafından kontrol edilecektir.</p>
 <button onclick="onayla()">Kabul Ediyorum</button>
 <button onclick="iptal()">Vazgeç</button>
-
 </div>
 
 <!-- TESLİMAT -->
-
 <div id="videoGonder" class="popup">
-
 <h2>SEFER TAMAMLANDI</h2>
-
-<p>Sevgili kaptan, teslimat sisteme kaydedildi.</p>
-
-<p>Ekran kaydını doğrulama için bize göndermen gerekiyor.</p>
-
-<p><b>WhatsApp:</b> 0549 541 18 74</p>
-<p><b>E-posta:</b> kemalulutasets@gmail.com</p>
-
-<p>Gönderirken kullanıcı adını ve yaptığın seferi yaz.</p>
-
-<p>Kayıt incelendikten sonra puanın kesinleşir.</p>
-
-<p><b>Ulutaş A.Ş iyi yolculuklar diler.</b></p>
-
+<p>Kayıtları yöneticilere göndermelisiniz:<br>
+Telefon: 05495411874 <br>
+E-posta: kemalulutasets@gmail.com <br>
+Göndermediğiniz takdirde puan hile olarak sayılacaktır.</p>
 <button onclick="kapatVideo()">Tamam</button>
-
 </div>
 
 <div id="bildirim" class="bildirim"></div>
 
 <script src="anasayfa.js"></script>
+<script>
+// Kullanıcı kontrolü
+const kullaniciAdi = localStorage.getItem("kullaniciAdi");
+if(!kullaniciAdi){
+    window.location.href = "index.html";
+}
+
+// Çıkış fonksiyonu
+function cikisYap(){
+    localStorage.removeItem("kullaniciAdi");
+    window.location.href="index.html";
+}
+</script>
+
 </body>
 </html>
