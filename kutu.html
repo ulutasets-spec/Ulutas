@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Ödül Kutusu - Ulutaş A.Ş</title>
+<style>
+body {
+    background:#020617;
+    color:white;
+    font-family:Arial, sans-serif;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    margin:0;
+    text-align:center;
+}
+
+h1 {
+    color:#22c55e;
+    margin-bottom:30px;
+}
+
+.kutu {
+    width:150px;
+    height:150px;
+    background:#333;
+    border:3px solid #22c55e;
+    border-radius:10px;
+    cursor:pointer;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:48px;
+    font-weight:bold;
+    position:relative;
+    transition: transform 0.6s ease;
+}
+
+.kutu.acik {
+    transform: rotateX(180deg);
+    background:#22c55e;
+}
+
+.odul {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    font-size:24px;
+    color:#fff;
+    display:none;
+}
+
+button {
+    margin-top:30px;
+    padding:10px 20px;
+    font-size:16px;
+    border:none;
+    border-radius:6px;
+    background:#22c55e;
+    cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<h1>Ödül Kutusu</h1>
+<p>Kutuyu tıklayarak 1-5 puan kazanabilirsiniz! (24 saatte 1 kez)</p>
+
+<div class="kutu" id="kutu">🎁</div>
+<div class="odul" id="odul">+0 Puan</div>
+
+<button onclick="window.location.href='anasayfa.html'">Ana Sayfaya Dön</button>
+
+<script>
+// DOM elemanları
+const kutu = document.getElementById('kutu');
+const odul = document.getElementById('odul');
+
+// 1-5 arasında rastgele puan
+function rastgelePuan() {
+    return Math.floor(Math.random() * 5) + 1;
+}
+
+// 24 saat kontrolü
+const sonAcma = localStorage.getItem('kutuSonAcma');
+const suan = new Date().getTime();
+
+if(sonAcma && suan - parseInt(sonAcma) < 24*60*60*1000){
+    kutu.style.cursor = 'not-allowed';
+    kutu.title = '24 saatte 1 kez açabilirsiniz.';
+}
+
+// Kutuyu tıklama
+kutu.addEventListener('click', () => {
+    if(kutu.classList.contains('acik')) return;
+    if(sonAcma && suan - parseInt(sonAcma) < 24*60*60*1000){
+        alert('24 saatte 1 kez açabilirsiniz!');
+        return;
+    }
+
+    // Açma animasyonu
+    kutu.classList.add('acik');
+
+    // Puan oluştur
+    const puan = rastgelePuan();
+    odul.textContent = `+${puan} Puan`;
+    odul.style.display = 'block';
+
+    // Son açma zamanını kaydet
+    localStorage.setItem('kutuSonAcma', new Date().getTime());
+
+    // Ana sayfadaki puana ekleme
+    const mevcutPuan = parseInt(localStorage.getItem('toplamPuan')) || 0;
+    localStorage.setItem('toplamPuan', mevcutPuan + puan);
+
+    // Opsiyonel: kullanıcıya bildirim
+    setTimeout(() => {
+        alert(`Tebrikler! +${puan} Puan kazandınız.`);
+    }, 600); // animasyon sonrası
+});
+</script>
+
+</body>
+</html>
